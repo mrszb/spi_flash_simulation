@@ -18,3 +18,5 @@ Cmocka library could be used to mock in embedded environment as well !
 However this implementation is quite memory hungry and suitable for PC.
 It uses at least as much RAM as the complete EEPROM chip size.
 Different implentation allocating only memory blocks used (written) on heap would be neded in system with smaller RAM.
+
+![image](./test.png)
