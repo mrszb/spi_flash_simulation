@@ -9,7 +9,10 @@
 static void test_erased(void **state)
 {
     sFLASH_EraseBulk();
-    assert_int_equal(2, 2);
+    uint8_t outputArray[3] = {0, 0, 0};
+    uint8_t expectedArray[3] = {0xff, 0xff, 0xff};
+    sFLASH_ReadBuffer(outputArray, 0, 3);
+    assert_memory_equal(outputArray, expectedArray, 3);
 }
 
 static void test_write(void **state)
@@ -17,15 +20,13 @@ static void test_write(void **state)
   uint8_t testWriteArray[3] = {'1', '2', '3'};
   uint8_t outputArray[3] = {0, 0, 0};
   sFLASH_WriteEnable();
-  sFLASH_WriteBuffer(testWriteArray, 0, 3);
+  sFLASH_WritePage(testWriteArray, 0, 3);
   sFLASH_ReadBuffer(outputArray, 0, 3);
-  assert_int_equal(1, 1);
+  assert_memory_equal(testWriteArray, outputArray, 3);
 }
 
 static void test_read(void **state)
 {
-    sFLASH_EraseBulk();
-    assert_int_equal(2, 2);
 }
 
 int main()
